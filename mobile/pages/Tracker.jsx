@@ -61,8 +61,8 @@ export default function Tracker() {
     return () => _unsubscribe();
   }, []);
   return (
-    <View classNames="">
-      <Text>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-red-400">
         Pedometer.isAvailableAsync(): {stepData.isPedometerAvailable}
       </Text>
       <Text>
