@@ -1,0 +1,4 @@
+backend/node_modules/
+mobile/node_modules/
+backend/.env
+mobile/.env
