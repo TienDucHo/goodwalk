@@ -7,6 +7,7 @@ import {
   SafeAreaProvider,
   SafeAreaView,
 } from "react-native-safe-area-context";
+import TabBarOptions from "./components/shared/TabBarOptions";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={TabBarOptions}>
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Login" component={Login} />
         </Tab.Navigator>
