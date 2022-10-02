@@ -33,12 +33,12 @@ const Welcome = ({ navigation }) => {
         </View>
         <View className="flex flex-col w-3/4 h-1/6 justify-around place-self-end justify-self-center">
           <CustomButtom
-            color="black"
+            type="secondary"
             text="Login"
             onClick={() => navigation.navigate("Login")}
           />
           <CustomButtom
-            color="black"
+            type="secondary"
             text="Sign Up"
             onClick={() => navigation.navigate("Sign Up")}
           />

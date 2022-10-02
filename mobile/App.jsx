@@ -24,21 +24,14 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLogged, setLogged] = useState(false);
+  const [user, setUser] = useState(null);
+  const value = { user, setUser };
 
   const toggleLogged = () => {
     setLogged((isLogged) => {
       return !isLogged;
     });
   };
-
-  const value = React.useMemo(
-    () => ({
-      isLogged,
-      toggleLogged,
-    }),
-    [isLogged]
-  );
 
   const [fontsLoaded] = useFonts({
     Kollektif: require("./assets/Kollektif.ttf"),
@@ -58,7 +51,7 @@ export default function App() {
   return (
     <SafeAreaProvider className="flex-1">
       <AuthContext.Provider value={value}>
-        {isLogged ? (
+        {user != null ? (
           <NavigationContainer>
             <Tab.Navigator
               screenOptions={TabBarOptions}
