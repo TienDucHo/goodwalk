@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const stepSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
     min: 3,
     max: 100,
     default: null,

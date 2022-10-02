@@ -20,7 +20,9 @@ router.post("/step/record", async (req, res) => {
     let myquery = { username: user.username };
     let newvalues = { $set: { stepcounter: totalsteps } };
     User.updateOne(myquery, newvalues, function (err, res) {});
-    res.status(200).send("Steps recorded");
+    res
+      .status(200)
+      .send(JSON.stringify({ message: "Steps recorded" }));
   } catch (err) {
     console.log(err);
     res.send(err).status(400);
