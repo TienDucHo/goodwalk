@@ -36,17 +36,17 @@ router.post("/login", async (req, res) => {
   res.status(200).send(user.name);
 });
 
-router.get("/steps/:username", async (req, res) => {
-  try {
-    const user = await User.findOne({
-      username: req.params.username,
-    });
-    //console.log(user)
-    res.send({ steps: user.stepcounter });
-  } catch (err) {
-    console.log(err);
-  }
-});
+router.get("/steps/:username", async(req,res)=>{
+    try{
+
+        const user = await User.findOne({username:req.params.username})
+        //console.log(user)
+        res.send({steps: user.stepcounter, user:user})
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 router.post("/steps/:username", async (req, res) => {
   try {
