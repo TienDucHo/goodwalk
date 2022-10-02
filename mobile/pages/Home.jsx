@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { Pedometer } from "expo-sensors";
 
-export default function Tracker() {
+export default function Home() {
   const [stepData, setStepData] = useState({
     isPedometerAvailable: "checking",
     pastStepCount: 0,
