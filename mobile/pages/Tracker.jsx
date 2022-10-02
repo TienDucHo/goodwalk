@@ -62,11 +62,16 @@ export default function Tracker() {
   }, []);
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <View className="bg-slate-400 border-2 rounded-full w-48 h-48 flex-initial justify-center items-center">
       <Text className="text-4xl ">{stepData.currentStepCount}</Text>
 =======
     <View classNames="">
       <Text>
+=======
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-red-400">
+>>>>>>> 2f8e65f (Resolved conflict)
         Pedometer.isAvailableAsync(): {stepData.isPedometerAvailable}
       </Text>
       <Text>
