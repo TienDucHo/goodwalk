@@ -24,10 +24,10 @@ const Welcome = () => {
         }}
       >
         <View className="flex flex-col justify-center items-center mt-48 mb-64">
-          <Text className="text-5xl font-bold text-text-black">
+          <Text className="text-5xl text-text-black font-kollektif-bold ">
             GoodWalk
           </Text>
-          <Text className="text-2xl text-text-black">
+          <Text className="text-2xl text-text-black font-kollektif">
             Walk for Good
           </Text>
         </View>

@@ -7,7 +7,9 @@ export default function CustomButtom(props) {
       className={`bg-${props.color} flex-initial justify-center items-center w-full p-4 rounded-xl`}
       onPress={props.onClick}
     >
-      <Text className="text-white text-xl">{props.text}</Text>
+      <Text className="text-white text-xl font-sans">
+        {props.text}
+      </Text>
     </Pressable>
   );
 }

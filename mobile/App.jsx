@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import { Pressable, View } from "react-native";
 import { House } from "phosphor-react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,10 +13,26 @@ import {
   SafeAreaView,
 } from "react-native-safe-area-context";
 import TabBarOptions from "./components/shared/TabBarOptions";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Kollektif: require("./assets/Kollektif.ttf"),
+    "Kollektif-Bold": require("./assets/Kollektif-Bold.ttf"),
+    "Kollektif-Italic": require("./assets/Kollektif-Italic.ttf"),
+    "Kollektif-BoldItalic": require("./assets/Kollektif-BoldItalic.ttf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <SafeAreaProvider className="flex-1">
       {/* <NavigationContainer>
