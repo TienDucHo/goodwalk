@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Charity from "./pages/Charity";
 import Wallet from "./pages/Wallet";
+import Welcome from "./pages/Welcome";
 import {
   SafeAreaProvider,
   SafeAreaView,
@@ -17,8 +18,8 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaProvider style={{}}>
-      <NavigationContainer>
+    <SafeAreaProvider>
+      {/* <NavigationContainer>
         <Tab.Navigator
           screenOptions={TabBarOptions}
           initialRouteName="Home"
@@ -47,7 +48,8 @@ export default function App() {
           />
           <Tab.Screen name="Wallet" component={Wallet} />
         </Tab.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
+      <Welcome />
     </SafeAreaProvider>
   );
 }
