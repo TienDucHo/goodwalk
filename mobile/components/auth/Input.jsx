@@ -13,6 +13,7 @@ export default function Input(props) {
         value={props.value}
         autoCorrect={false}
         placeholder={props.text}
+        secureTextEntry={props.secure ? true : false}
       />
     </View>
   );

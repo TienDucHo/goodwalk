@@ -5,10 +5,10 @@ import Name from "../components/shared/name";
 import AuthContext from "../components/context/AuthContext";
 
 const URL =
-  "https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io:4000";
+  "https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io";
 export default function Wallet() {
-  const [steps, setSteps] = useState();
-  const [money, setMoney] = useState();
+  const [steps, setSteps] = useState(0);
+  const [money, setMoney] = useState(0);
   const [userdata, setUserdata] = useState({ name: "" });
   const [initials, setInitials] = useState();
   const { user, _ } = useContext(AuthContext);
@@ -21,6 +21,7 @@ export default function Wallet() {
         .then((json) => {
           setSteps(json.user["stepcounter"]);
           const conversion = steps * 0.00002;
+          console.log(conversion);
           setMoney(conversion);
           setUserdata(json.user);
           const i =
@@ -38,6 +39,32 @@ export default function Wallet() {
     };
     getData();
   }, []);
+  useEffect(() => {
+    const url = `${URL}/steps/${user.username.toLowerCase()}`;
+    const getData = async () => {
+      await fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          setSteps(json.user["stepcounter"]);
+          const conversion = steps * 0.00002;
+          console.log(conversion);
+          setMoney(conversion);
+          setUserdata(json.user);
+          const i =
+            json.user["name"][0] +
+            json.user["name"][
+              json.user["name"].length - 1
+            ].toUpperCase();
+          setInitials(i);
+          //console.log(json.user["stepcounter"])
+          //console.log(i)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getData();
+  }, [user]);
 
   return (
     <ImageBackground

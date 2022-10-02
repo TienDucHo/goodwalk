@@ -8,48 +8,13 @@ import AuthContext from "../components/context/AuthContext";
 
 export default function Home() {
   const { user, _ } = useContext(AuthContext);
-  const [stepData, setStepData] = useState({
-    isPedometerAvailable: "checking",
-    pastStepCount: 0,
-    currentStepCount: 0,
-  });
+  const [stepData, setStepData] = useState(0);
   const [subscription, setSubscription] = useState(null);
   const _subscribe = () => {
     setSubscription(
       Pedometer.watchStepCount((result) => {
-        setStepData({
-          ...stepData,
-          currentStepCount: stepData.currentStepCount + result.steps,
-        });
+        setStepData(result.steps);
       })
-    );
-    Pedometer.isAvailableAsync().then(
-      (result) => {
-        setStepData({
-          isPedometerAvailable: String(result),
-        });
-      },
-      (error) => {
-        setStepData({
-          isPedometerAvailable:
-            "Could not get isPedometerAvailable: " + error,
-        });
-      }
-    );
-
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - 1);
-    Pedometer.getStepCountAsync(start, end).then(
-      (result) => {
-        setStepData({ ...stepData, pastStepCount: result.steps });
-      },
-      (error) => {
-        setStepData({
-          ...stepData,
-          pastStepCount: "Could not get stepCount: " + error,
-        });
-      }
     );
   };
   const _unsubscribe = () => {
@@ -69,10 +34,7 @@ export default function Home() {
       )
         .then((response) => response.json())
         .then((data) => {
-          setStepData({
-            ...stepData,
-            currentStepCount: data.steps,
-          });
+          setStepData(data.steps);
         })
         .catch((err) => {
           console.log(err);
@@ -90,7 +52,7 @@ export default function Home() {
       let start = new Date(end - 120000);
       const loginCredential = JSON.stringify({
         username: user.username,
-        stepcounter: stepData.currentStepCount,
+        stepcounter: stepData,
         start: start,
         end: end,
       });
@@ -139,9 +101,7 @@ export default function Home() {
           </View>
         </View>
         <View className="bg-white/75 w-3/4 flex-initial justify-center items-center p-12 rounded-3xl">
-          <Text className="text-6xl">
-            {stepData.currentStepCount}
-          </Text>
+          <Text className="text-6xl">{stepData}</Text>
           <Text className="font-sans text-grey mb-12">
             Steps Today
           </Text>

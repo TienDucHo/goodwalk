@@ -65,6 +65,7 @@ export default function Login() {
               text="Password"
               onChangeText={setPassword}
               value={password}
+              secure={true}
             ></Input>
           </View>
           <CustomButtom
