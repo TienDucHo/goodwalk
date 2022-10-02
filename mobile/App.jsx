@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import { Pressable, View } from "react-native";
 import { House } from "phosphor-react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -7,18 +7,35 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Charity from "./pages/Charity";
 import Wallet from "./pages/Wallet";
+import Welcome from "./pages/Welcome";
 import {
   SafeAreaProvider,
   SafeAreaView,
 } from "react-native-safe-area-context";
 import TabBarOptions from "./components/shared/TabBarOptions";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Kollektif: require("./assets/Kollektif.ttf"),
+    "Kollektif-Bold": require("./assets/Kollektif-Bold.ttf"),
+    "Kollektif-Italic": require("./assets/Kollektif-Italic.ttf"),
+    "Kollektif-BoldItalic": require("./assets/Kollektif-BoldItalic.ttf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <SafeAreaProvider style={{}}>
-      <NavigationContainer>
+    <SafeAreaProvider className="flex-1">
+      {/* <NavigationContainer>
         <Tab.Navigator
           screenOptions={TabBarOptions}
           initialRouteName="Home"
@@ -47,7 +64,8 @@ export default function App() {
           />
           <Tab.Screen name="Wallet" component={Wallet} />
         </Tab.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
+      <Welcome />
     </SafeAreaProvider>
   );
 }
