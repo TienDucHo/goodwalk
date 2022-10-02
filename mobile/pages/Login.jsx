@@ -31,6 +31,7 @@ export default function Login() {
         console.log(err);
       });
   };
+
   return (
     <ImageBackground
       source={require("../assets/fitted_background.png")}
