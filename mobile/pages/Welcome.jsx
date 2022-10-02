@@ -3,7 +3,7 @@ import { View, Text, Pressable, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButtom from "../components/shared/CustomButton";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 flex-col">
       <ImageBackground
@@ -33,18 +33,14 @@ const Welcome = () => {
         </View>
         <View className="flex flex-col w-3/4 h-1/6 justify-around place-self-end justify-self-center">
           <CustomButtom
-            color="black"
+            type="secondary"
             text="Login"
-            onClick={() => {
-              console.log("Hello Login");
-            }}
+            onClick={() => navigation.navigate("Login")}
           />
           <CustomButtom
-            color="black"
+            type="secondary"
             text="Sign Up"
-            onClick={() => {
-              console.log("Hello Sign Up");
-            }}
+            onClick={() => navigation.navigate("Sign Up")}
           />
         </View>
       </ImageBackground>
