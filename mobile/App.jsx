@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider className="flex-1">
       {/* <NavigationContainer>
         <Tab.Navigator
           screenOptions={TabBarOptions}
