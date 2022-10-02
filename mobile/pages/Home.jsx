@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, View } from "react-native";
 import { Pedometer } from "expo-sensors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const [stepData, setStepData] = useState({
@@ -61,8 +57,10 @@ export default function Home() {
     return () => _unsubscribe();
   }, []);
   return (
-    <View className="bg-slate-400 border-2 rounded-full w-48 h-48 flex-initial justify-center items-center">
-      <Text className="text-4xl ">{stepData.currentStepCount}</Text>
-    </View>
+    <SafeAreaView className="flex-1 justify-center items-center">
+      <View className="bg-slate-400 border-2 rounded-full w-48 h-48 flex-initial justify-center items-center">
+        <Text className="text-4xl">{stepData.currentStepCount}</Text>
+      </View>
+    </SafeAreaView>
   );
 }
