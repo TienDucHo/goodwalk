@@ -16,7 +16,7 @@ export default function Login() {
       password: password,
     });
     await fetch(
-      "https://aa24-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/login",
+      "https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/login",
       {
         method: "post",
         body: loginCredential,
@@ -31,6 +31,7 @@ export default function Login() {
         console.log(err);
       });
   };
+
   return (
     <ImageBackground
       source={require("../assets/fitted_background.png")}
