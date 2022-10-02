@@ -18,7 +18,7 @@ export default function SignUp({ navigation }) {
       name: name,
     });
     await fetch(
-      "https://aa24-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/register",
+      "https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/register",
       {
         method: "post",
         body: loginCredential,

@@ -8,7 +8,6 @@ import AuthContext from "../components/context/AuthContext";
 
 export default function Home() {
   const { user, _ } = useContext(AuthContext);
-  let oldData = 0;
   const [stepData, setStepData] = useState({
     isPedometerAvailable: "checking",
     pastStepCount: 0,
@@ -20,7 +19,7 @@ export default function Home() {
       Pedometer.watchStepCount((result) => {
         setStepData({
           ...stepData,
-          currentStepCount: oldData + result.steps,
+          currentStepCount: stepData.currentStepCount + result.steps,
         });
       })
     );
@@ -60,7 +59,7 @@ export default function Home() {
   useEffect(() => {
     const submit = async () => {
       await fetch(
-        `https://aa24-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/steps/${user.username}`,
+        `https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/steps/${user.username}`,
         {
           method: "get",
           headers: {
@@ -70,7 +69,6 @@ export default function Home() {
       )
         .then((response) => response.json())
         .then((data) => {
-          oldData = data.steps;
           setStepData({
             ...stepData,
             currentStepCount: data.steps,
@@ -87,7 +85,7 @@ export default function Home() {
     return () => _unsubscribe();
   }, []);
   useEffect(() => {
-    function updateSteps() {
+    async function updateSteps() {
       let end = new Date();
       let start = new Date(end - 120000);
       const loginCredential = JSON.stringify({
@@ -97,17 +95,20 @@ export default function Home() {
         end: end,
       });
       console.log(loginCredential);
-      fetch(
-        "https://aa24-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/step/record",
+      await fetch(
+        "https://56d2-2620-101-c040-85c-9499-41b1-ddf6-c1c7.ngrok.io/step/record",
         {
-          method: "post",
           body: loginCredential,
+          method: "post",
+          headers: {
+            "Content-type": "application/json",
+          },
         }
       )
-        .then((result) => result.json())
-        .then((data) => console.log(data));
+        .then((result) => result.text())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
     }
-    updateSteps();
     const interval = setInterval(() => updateSteps(), 120000);
     return () => {
       clearInterval(interval);
